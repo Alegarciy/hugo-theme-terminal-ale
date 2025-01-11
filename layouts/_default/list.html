@@ -7,20 +7,27 @@
   <div class="posts">
     {{ range .Paginator.Pages }}
       <article class="post on-list">
+        <!-- Post Title -->
         <h2 class="post-title">
           <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
         </h2>
+
+        <!-- Post Meta -->
         <div class="post-meta">
+          <!-- Date -->
           {{- if .Date -}}
             <time class="post-date">
               {{- partial "post-date" . -}}
             </time>
           {{- end -}}
+
+          <!-- Author (if you want to show it) -->
           {{- with .Params.Author -}}
             <span class="post-author">{{- . -}}</span>
           {{- end -}}
         </div>
 
+        <!-- Tags (optional; remove if you don't want them) -->
         {{ if .Params.tags }}
           <span class="post-tags">
             {{ range .Params.tags }}
@@ -31,8 +38,11 @@
           </span>
         {{ end }}
 
+        <!-- Optional cover image -->
         {{ partial "cover.html" . }}
 
+        <!-- Remove summary/description by emptying out or removing this block -->
+        <!--
         <div class="post-content">
           {{ if .Params.showFullContent }}
             {{ .Content }}
@@ -42,12 +52,16 @@
             {{ .Summary }}
           {{ end }}
         </div>
+        -->
 
-        {{ if not .Params.showFullContent }}
-           <div>
-            <a class="read-more button inline" href="{{ .RelPermalink }}">{{ $.Site.Params.ReadMore }}</a>
-          </div>
-        {{ end }}
+        <!-- Remove the read-more link as well -->
+        <!--
+        <div>
+          <a class="read-more button inline" href="{{ .RelPermalink }}">
+            {{ $.Site.Params.ReadMore }}
+          </a>
+        </div>
+        -->
       </article>
     {{ end }}
 
